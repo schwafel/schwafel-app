@@ -1,8 +1,9 @@
 <script setup>
+import GeneratedText from "./GeneratedText.vue";
 import { ref } from "vue";
 
 const inputs = ref("I dream of a");
-const generated_text = ref("");
+const generated_list = ref([]);
 async function generate() {
   let url = "https://schwafel-worker.chriamue.net/generate";
   let data = { message: inputs.value };
@@ -11,7 +12,6 @@ async function generate() {
     mode: "cors",
     cache: "no-cache",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
     },
     credentials: "omit",
@@ -20,7 +20,9 @@ async function generate() {
   })
     .then((response) => response.json())
     .then((body) => {
-      generated_text.value = body.generated_text;
+      generated_list.value = [{ text: body.generated_text }].concat(
+        generated_list.value
+      );
     })
     .catch(console.log);
 }
@@ -52,7 +54,12 @@ defineProps({});
         </div>
       </div>
     </div>
-    <textarea class="form-control" v-model="generated_text" />
+    <generated-text
+      v-for="(item, index) in generated_list"
+      :text="item.text"
+      :index="index"
+      :key="index"
+    ></generated-text>
   </div>
 </template>
 
