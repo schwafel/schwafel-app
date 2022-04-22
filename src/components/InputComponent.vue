@@ -2,7 +2,8 @@
 import GeneratedText from "./GeneratedText.vue";
 import { ref } from "vue";
 
-const inputs = ref("I dream of a");
+const inputs = ref("I dream of a world");
+const question = ref("What's in your mind?");
 const generated_list = ref([]);
 async function generate() {
   let url = "https://schwafel-worker.chriamue.net/generate";
@@ -21,6 +22,29 @@ async function generate() {
     .then((response) => response.json())
     .then((body) => {
       generated_list.value = [{ text: body.generated_text }].concat(
+        generated_list.value
+      );
+    })
+    .catch(console.log);
+}
+
+async function answer() {
+  let url = "https://schwafel-worker.chriamue.net/answer";
+  let data = { question: question.value, context: inputs.value };
+  fetch(url, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "omit",
+    redirect: "follow",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((body) => {
+      generated_list.value = [{ text: body.answer }].concat(
         generated_list.value
       );
     })
@@ -49,6 +73,18 @@ defineProps({});
               v-on:click="generate"
             >
               Schwafel
+            </button>
+          </div>
+        </div>
+        <div class="input-group">
+          <input class="form-control" v-model="question" />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              v-on:click="answer"
+            >
+              ?
             </button>
           </div>
         </div>
