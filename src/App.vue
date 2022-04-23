@@ -1,19 +1,73 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import InputComponent from './components/InputComponent.vue';
+import { ref } from "vue";
+import HelloWorld from "./components/HelloWorld.vue";
+import InputComponent from "./components/InputComponent.vue";
+import GeneratedText from "./components/GeneratedText.vue";
+const generated_list = ref([]);
+async function generate(message) {
+  let url = "https://schwafel-worker.chriamue.net/generate";
+  let data = { message };
+  fetch(url, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "omit",
+    redirect: "follow",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((body) => {
+      generated_list.value = [{ text: body.generated_text }].concat(
+        generated_list.value
+      );
+    })
+    .catch(console.log);
+}
+async function answer(question, context) {
+  let url = "https://schwafel-worker.chriamue.net/answer";
+  let data = { question, context };
+  fetch(url, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "omit",
+    redirect: "follow",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((body) => {
+      generated_list.value = [{ text: body.answer }].concat(
+        generated_list.value
+      );
+    })
+    .catch(console.log);
+}
+
 </script>
 
 <template>
-  <header>
-  </header>
+  <header></header>
 
   <main>
-    <InputComponent />
+    <InputComponent :generate="generate" :answer="answer" />
+    <generated-text
+      v-for="(item, index) in generated_list"
+      :text="item.text"
+      :generate="generate"
+      :index="index"
+      :key="index"
+    ></generated-text>
   </main>
 </template>
 
 <style>
-@import './assets/base.css';
+@import "./assets/base.css";
 
 #app {
   max-width: 1280px;
