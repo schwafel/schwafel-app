@@ -48,6 +48,28 @@ async function answer(question, context) {
     })
     .catch(console.log);
 }
+async function headline(message) {
+  let url = "http://schwafel-worker.chriamue.net/headline";
+  let data = { message };
+  fetch(url, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "omit",
+    redirect: "follow",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((body) => {
+      generated_list.value = [{ text: body.generated_text }].concat(
+        generated_list.value
+      );
+    })
+    .catch(console.log);
+}
 
 </script>
 
@@ -55,7 +77,7 @@ async function answer(question, context) {
   <header></header>
 
   <main>
-    <InputComponent :generate="generate" :answer="answer" />
+    <InputComponent :generate="generate" :answer="answer" :headline="headline" />
     <generated-text
       v-for="(item, index) in generated_list"
       :text="item.text"

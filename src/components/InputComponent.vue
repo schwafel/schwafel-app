@@ -11,6 +11,10 @@ defineProps({
     answer: {
     type: Function,
     required: true
+  },
+    headline: {
+    type: Function,
+    required: true
   }
 })
 </script>
@@ -35,6 +39,13 @@ defineProps({
               v-on:click="() => generate(inputs)"
             >
               Schwafel
+            </button>
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              v-on:click="() => headline(inputs)"
+            >
+              >
             </button>
           </div>
         </div>
