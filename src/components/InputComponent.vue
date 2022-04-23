@@ -6,30 +6,29 @@ const question = ref("What's in your mind?");
 defineProps({
   generate: {
     type: Function,
-    required: true
+    required: true,
   },
-    answer: {
+  answer: {
     type: Function,
-    required: true
+    required: true,
   },
-    headline: {
+  headline: {
     type: Function,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 </script>
 
 <template>
   <div class="input-component">
-    <div class="card">
+    <div class="card bg-light md-2">
+      <div class="card-header">What's in your mind?</div>
       <div class="card-body">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">What's in your mind?</span>
-          </div>
+        <div class="input-group md-auto">
           <textarea
             class="form-control"
-            aria-label="With textarea"
+            rows="5"
+            cols="80"
             v-model="inputs"
           ></textarea>
           <div class="input-group-append">
@@ -63,11 +62,14 @@ defineProps({
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <style scoped>
 .input-component {
+  width: 90%;
+}
+input {
+  max-width: 100%;
 }
 </style>

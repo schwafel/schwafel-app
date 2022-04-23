@@ -1,10 +1,9 @@
 <script setup>
 import { ref } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
 import InputComponent from "./components/InputComponent.vue";
 import GeneratedText from "./components/GeneratedText.vue";
 const generated_list = ref([]);
-async function generate(message) {
+const generate = async (message) => {
   let url = "https://schwafel-worker.chriamue.net/generate";
   let data = { message };
   fetch(url, {
@@ -25,8 +24,8 @@ async function generate(message) {
       );
     })
     .catch(console.log);
-}
-async function answer(question, context) {
+};
+const answer = async (question, context) => {
   let url = "https://schwafel-worker.chriamue.net/answer";
   let data = { question, context };
   fetch(url, {
@@ -47,8 +46,8 @@ async function answer(question, context) {
       );
     })
     .catch(console.log);
-}
-async function headline(message) {
+};
+const headline = async (message) => {
   let url = "http://schwafel-worker.chriamue.net/headline";
   let data = { message };
   fetch(url, {
@@ -69,15 +68,18 @@ async function headline(message) {
       );
     })
     .catch(console.log);
-}
-
+};
 </script>
 
 <template>
   <header></header>
 
   <main>
-    <InputComponent :generate="generate" :answer="answer" :headline="headline" />
+    <InputComponent
+      :generate="generate"
+      :answer="answer"
+      :headline="headline"
+    />
     <generated-text
       v-for="(item, index) in generated_list"
       :text="item.text"
@@ -92,9 +94,8 @@ async function headline(message) {
 @import "./assets/base.css";
 
 #app {
-  max-width: 1280px;
+  max-width: 90%;
   margin: 0 auto;
-  padding: 2rem;
 
   font-weight: normal;
 }
