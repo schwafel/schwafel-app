@@ -55,7 +55,7 @@ const answer = async (question, context) => {
 };
 const headline = async (message) => {
   loading.value = true;
-  let url = "http://schwafel-worker.chriamue.net/headline";
+  let url = "https://schwafel-worker.chriamue.net/headline";
   let data = { message };
   fetch(url, {
     method: "POST",
@@ -79,7 +79,7 @@ const headline = async (message) => {
 };
 const summarize = async (message) => {
   loading.value = true;
-  let url = "http://schwafel-worker.chriamue.net/summarize";
+  let url = "https://schwafel-worker.chriamue.net/summarize";
   let data = { message };
   fetch(url, {
     method: "POST",
