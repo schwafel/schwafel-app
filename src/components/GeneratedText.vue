@@ -14,7 +14,7 @@ defineProps({
 <template>
   <div class="generated-text">
     <div class="card">
-      <textarea class="form-control" v-model="text" />
+      <textarea class="form-control" v-model="text" rows="3" />
       <div class="input-group-append">
         <button
           class="btn btn-outline-secondary"

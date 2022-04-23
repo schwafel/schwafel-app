@@ -2,8 +2,11 @@
 import { ref } from "vue";
 import InputComponent from "./components/InputComponent.vue";
 import GeneratedText from "./components/GeneratedText.vue";
+import PacmanLoader from "vue-spinner/src/PacmanLoader.vue";
 const generated_list = ref([]);
+const loading = ref(false);
 const generate = async (message) => {
+  loading.value = true;
   let url = "https://schwafel-worker.chriamue.net/generate";
   let data = { message };
   fetch(url, {
@@ -23,9 +26,11 @@ const generate = async (message) => {
         generated_list.value
       );
     })
-    .catch(console.log);
+    .catch(console.log)
+    .finally(() => (loading.value = false));
 };
 const answer = async (question, context) => {
+  loading.value = true;
   let url = "https://schwafel-worker.chriamue.net/answer";
   let data = { question, context };
   fetch(url, {
@@ -45,9 +50,11 @@ const answer = async (question, context) => {
         generated_list.value
       );
     })
-    .catch(console.log);
+    .catch(console.log)
+    .finally(() => (loading.value = false));
 };
 const headline = async (message) => {
+  loading.value = true;
   let url = "http://schwafel-worker.chriamue.net/headline";
   let data = { message };
   fetch(url, {
@@ -67,12 +74,15 @@ const headline = async (message) => {
         generated_list.value
       );
     })
-    .catch(console.log);
+    .catch(console.log)
+    .finally(() => (loading.value = false));
 };
 </script>
 
 <template>
-  <header></header>
+  <header>
+    <pacman-loader :loading="loading"></pacman-loader>
+  </header>
 
   <main>
     <InputComponent
