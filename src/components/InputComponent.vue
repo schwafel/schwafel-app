@@ -39,20 +39,24 @@ defineProps({
           <div class="input-group-append">
             <div class="buttons">
               <button
+                title="generate some text"
                 class="btn btn-outline-secondary"
                 type="button"
                 v-on:click="() => generate(inputs)"
               >
+                <font-awesome-icon icon="robot" />
                 Schwafel
               </button>
               <button
+                title="generate headline"
                 class="btn btn-outline-secondary"
                 type="button"
                 v-on:click="() => headline(inputs)"
               >
-                >
+                <font-awesome-icon icon="newspaper" />
               </button>
               <button
+                title="generate summary"
                 class="btn btn-outline-secondary"
                 type="button"
                 v-on:click="() => summarize(inputs)"
@@ -63,14 +67,19 @@ defineProps({
           </div>
         </div>
         <div class="input-group">
-          <input class="form-control" v-model="question" />
+          <input
+            class="form-control"
+            v-model="question"
+            v-on:keyup.enter.exact="() => answer(question, inputs)"
+          />
           <div class="input-group-append">
             <button
+              title="ask a question"
               class="btn btn-outline-secondary"
               type="button"
               v-on:click="() => answer(question, inputs)"
             >
-              ?
+              <font-awesome-icon icon="circle-question" />
             </button>
           </div>
         </div>
