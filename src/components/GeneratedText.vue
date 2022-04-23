@@ -21,7 +21,7 @@ defineProps({
           type="button"
           v-on:click="() => generate(text)"
         >
-          Schwafel
+          Schwafel more
         </button>
       </div>
     </div>

@@ -77,6 +77,30 @@ const headline = async (message) => {
     .catch(console.log)
     .finally(() => (loading.value = false));
 };
+const summarize = async (message) => {
+  loading.value = true;
+  let url = "http://schwafel-worker.chriamue.net/summarize";
+  let data = { message };
+  fetch(url, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "omit",
+    redirect: "follow",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((body) => {
+      generated_list.value = [{ text: body.summary_text }].concat(
+        generated_list.value
+      );
+    })
+    .catch(console.log)
+    .finally(() => (loading.value = false));
+};
 </script>
 
 <template>
@@ -88,6 +112,7 @@ const headline = async (message) => {
     <InputComponent
       :generate="generate"
       :answer="answer"
+      :summarize="summarize"
       :headline="headline"
     />
     <generated-text

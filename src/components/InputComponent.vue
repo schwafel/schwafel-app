@@ -16,6 +16,10 @@ defineProps({
     type: Function,
     required: true,
   },
+  summarize: {
+    type: Function,
+    required: true,
+  },
 });
 </script>
 
@@ -30,22 +34,32 @@ defineProps({
             rows="5"
             cols="80"
             v-model="inputs"
+            v-on:keyup.enter.exact="() => generate(inputs)"
           ></textarea>
           <div class="input-group-append">
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              v-on:click="() => generate(inputs)"
-            >
-              Schwafel
-            </button>
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              v-on:click="() => headline(inputs)"
-            >
+            <div class="buttons">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                v-on:click="() => generate(inputs)"
               >
-            </button>
+                Schwafel
+              </button>
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                v-on:click="() => headline(inputs)"
+              >
+                >
+              </button>
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                v-on:click="() => summarize(inputs)"
+              >
+                TLDR;
+              </button>
+            </div>
           </div>
         </div>
         <div class="input-group">
@@ -71,5 +85,9 @@ defineProps({
 }
 input {
   max-width: 100%;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
 }
 </style>
