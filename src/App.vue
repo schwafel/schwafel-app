@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import InputComponent from "./components/InputComponent.vue";
 import GeneratedText from "./components/GeneratedText.vue";
 import PacmanLoader from "vue-spinner/src/PacmanLoader.vue";
@@ -25,6 +25,10 @@ const generate = async (message) => {
       generated_list.value = [{ text: body.generated_text }].concat(
         generated_list.value
       );
+      localStorage.setItem(
+        "generated_list",
+        JSON.stringify(generated_list.value)
+      );
     })
     .catch(console.log)
     .finally(() => (loading.value = false));
@@ -48,6 +52,10 @@ const answer = async (question, context) => {
     .then((body) => {
       generated_list.value = [{ text: body.answer }].concat(
         generated_list.value
+      );
+      localStorage.setItem(
+        "generated_list",
+        JSON.stringify(generated_list.value)
       );
     })
     .catch(console.log)
@@ -73,6 +81,10 @@ const headline = async (message) => {
       generated_list.value = [{ text: body.generated_text }].concat(
         generated_list.value
       );
+      localStorage.setItem(
+        "generated_list",
+        JSON.stringify(generated_list.value)
+      );
     })
     .catch(console.log)
     .finally(() => (loading.value = false));
@@ -97,10 +109,23 @@ const summarize = async (message) => {
       generated_list.value = [{ text: body.summary_text }].concat(
         generated_list.value
       );
+      localStorage.setItem(
+        "generated_list",
+        JSON.stringify(generated_list.value)
+      );
     })
     .catch(console.log)
     .finally(() => (loading.value = false));
 };
+onMounted(() => {
+  if (localStorage.getItem("generated_list")) {
+    try {
+      generated_list.value = JSON.parse(localStorage.getItem("generated_list"));
+    } catch (e) {
+      localStorage.removeItem("generated_list");
+    }
+  }
+});
 </script>
 
 <template>
