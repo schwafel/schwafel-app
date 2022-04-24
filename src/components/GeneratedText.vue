@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import ToolBox from "./ToolBox.vue";
 import QuestionComponent from "./QuestionComponent.vue";
-defineProps({
+const props = defineProps({
   text: {
     type: String,
     required: true,
@@ -17,6 +17,9 @@ defineProps({
   },
 });
 const hover = ref(false);
+const copyText = () => {
+  navigator.clipboard.writeText(props.text);
+};
 </script>
 
 <template>
@@ -26,7 +29,13 @@ const hover = ref(false);
     @mouseleave="hover = false"
   >
     <div class="card">
-      <textarea class="form-control" v-model="text" rows="3" />
+      <textarea
+        class="form-control"
+        v-model="text"
+        rows="3"
+        v-on:dblclick="copyText"
+        title="doubleclick for copy to clipboard"
+      />
       <div class="input-group-append">
         <tool-box :generate="generate" :inputs="text" />
       </div>

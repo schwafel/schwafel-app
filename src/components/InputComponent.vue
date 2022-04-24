@@ -34,6 +34,7 @@ defineProps({
             rows="5"
             cols="80"
             v-model="inputs"
+            @focus="$event.target.select()"
             v-on:keyup.enter.exact="() => generate(inputs)"
           ></textarea>
           <div class="input-group-append">
