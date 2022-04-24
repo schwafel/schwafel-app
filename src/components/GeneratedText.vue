@@ -1,4 +1,5 @@
 <script setup>
+import ToolBox from "./ToolBox.vue";
 defineProps({
   text: {
     type: String,
@@ -16,13 +17,7 @@ defineProps({
     <div class="card">
       <textarea class="form-control" v-model="text" rows="3" />
       <div class="input-group-append">
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          v-on:click="() => generate(text)"
-        >
-          Schwafel more
-        </button>
+        <tool-box :generate="generate" :inputs="inputs" />
       </div>
     </div>
   </div>

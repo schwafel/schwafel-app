@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-
+import ToolBox from "./ToolBox.vue";
 const inputs = ref("I dream of a world");
 const question = ref("What's in your mind?");
 defineProps({
@@ -38,31 +38,13 @@ defineProps({
           ></textarea>
           <div class="input-group-append">
             <div class="buttons">
-              <button
-                title="generate some text"
-                class="btn btn-outline-secondary"
-                type="button"
-                v-on:click="() => generate(inputs)"
-              >
-                <font-awesome-icon icon="robot" />
-                Schwafel
-              </button>
-              <button
-                title="generate headline"
-                class="btn btn-outline-secondary"
-                type="button"
-                v-on:click="() => headline(inputs)"
-              >
-                <font-awesome-icon icon="newspaper" />
-              </button>
-              <button
-                title="generate summary"
-                class="btn btn-outline-secondary"
-                type="button"
-                v-on:click="() => summarize(inputs)"
-              >
-                TLDR;
-              </button>
+              <tool-box
+                :inputs="inputs"
+                :generate="generate"
+                :answer="answer"
+                :headline="headline"
+                :summarize="summarize"
+              />
             </div>
           </div>
         </div>
