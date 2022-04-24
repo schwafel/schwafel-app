@@ -119,6 +119,7 @@ const summarize = async (message) => {
       v-for="(item, index) in generated_list"
       :text="item.text"
       :generate="generate"
+      :answer="answer"
       :index="index"
       :key="index"
     ></generated-text>
