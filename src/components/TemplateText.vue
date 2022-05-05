@@ -45,4 +45,7 @@ const copyText = () => {
 </template>
 
 <style scoped>
+.generated-text {
+  margin: 50px;
+}
 </style>

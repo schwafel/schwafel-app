@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { Slide } from "vue3-burger-menu";
 import InputComponent from "./components/InputComponent.vue";
+import TemplateText from "./components/TemplateText.vue";
 import GeneratedText from "./components/GeneratedText.vue";
 import PacmanLoader from "vue-spinner/src/PacmanLoader.vue";
 const generated_list = ref([]);
@@ -134,13 +136,28 @@ onMounted(() => {
   </header>
 
   <main>
-    <InputComponent
+    <Slide>
+      <template-text
+        text="Product description: A home milkshake maker
+        Seed words: fast, healthy, compact."
+        :generate="generate"
+        :answer="answer"
+      />
+      <template-text
+        text="List 10 science fiction books:"
+        :generate="generate"
+        :answer="answer"
+      />
+    </Slide>
+    <input-component
+      class="input-component"
       :generate="generate"
       :answer="answer"
       :summarize="summarize"
       :headline="headline"
     />
     <generated-text
+      class="generated-text"
       v-for="(item, index) in generated_list"
       :text="item.text"
       :generate="generate"
@@ -157,8 +174,15 @@ onMounted(() => {
 #app {
   max-width: 90%;
   margin: 0 auto;
-
   font-weight: normal;
+}
+
+.input-component {
+  margin-top: 100px;
+}
+
+.generated-text {
+  margin: 50px;
 }
 
 @media (hover: hover) {
@@ -169,7 +193,6 @@ onMounted(() => {
 
 @media (min-width: 1024px) {
   body {
-    display: flex;
     align-items: center;
   }
 
