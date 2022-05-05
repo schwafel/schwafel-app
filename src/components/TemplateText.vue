@@ -3,6 +3,10 @@ import { ref } from "vue";
 import ToolBox from "./ToolBox.vue";
 import QuestionComponent from "./QuestionComponent.vue";
 const props = defineProps({
+  title: {
+    type: String,
+    required: false,
+  },
   text: {
     type: String,
     required: true,
@@ -24,11 +28,12 @@ const copyText = () => {
 
 <template>
   <div
-    class="generated-text"
+    class="template-text"
     @mouseover="hover = true"
     @mouseleave="hover = false"
   >
     <div class="card">
+      <div v-if="title" class="card-header">{{title}}</div>
       <textarea
         class="form-control"
         v-model="text"
@@ -45,7 +50,4 @@ const copyText = () => {
 </template>
 
 <style scoped>
-.generated-text {
-  margin: 50px;
-}
 </style>

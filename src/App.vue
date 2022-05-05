@@ -138,12 +138,14 @@ onMounted(() => {
   <main>
     <Slide>
       <template-text
+        title="generate product description"
         text="Product description: A home milkshake maker
         Seed words: fast, healthy, compact."
         :generate="generate"
         :answer="answer"
       />
       <template-text
+        title="create a list of items"
         text="List 10 science fiction books:"
         :generate="generate"
         :answer="answer"
