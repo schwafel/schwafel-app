@@ -1,0 +1,26 @@
+[
+    {
+        "title": "generate product description",
+        "text": "Product description: A home milkshake maker\nSeed words: fast, healthy, compact."
+    },
+    {
+        "title": "create a list of items",
+        "text": "List 10 science fiction books:"
+    },
+    {
+        "title": "Corrects sentences into standard English.",
+        "text": "Correct this to standard English:\nShe no went to the market."
+    },
+    {
+        "title": "Create analogies.",
+        "text": "Create an analogy for this phrase:\nQuestions are arrows in that:"
+    },
+    {
+        "title": "Create interview questions.",
+        "text": "Create a list of 8 questions for my interview with a science fiction author:"
+    },
+    {
+        "title": "Restaurant review creator",
+        "text": "Write a restaurant review based on these notes:\nName: The Blue Wharf\nLobster great, noisy, service polite, prices good.\nReview:"
+    }
+]

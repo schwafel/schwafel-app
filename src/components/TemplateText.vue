@@ -33,7 +33,7 @@ const copyText = () => {
     @mouseleave="hover = false"
   >
     <div class="card">
-      <div v-if="title" class="card-header">{{title}}</div>
+      <h5 v-if="title" class="card-title">{{ title }}</h5>
       <textarea
         class="form-control"
         v-model="text"
@@ -50,4 +50,10 @@ const copyText = () => {
 </template>
 
 <style scoped>
+.card-title {
+  font-size: medium;
+}
+.form-control {
+  font-size: small;
+}
 </style>

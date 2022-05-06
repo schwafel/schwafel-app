@@ -44,5 +44,4 @@ const copyText = () => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
