@@ -1,6 +1,10 @@
 {
   "name": "schwafel-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "description": "app for AI based text generation",
+  "keywords": ["ai", "text-generation"],
+  "license": "MIT",
+  "homepage": "https://schwafel.app",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
