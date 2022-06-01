@@ -25,9 +25,9 @@ const generate = async (message) => {
   })
     .then((response) => response.json())
     .then((body) => {
-      generated_list.value = [{ text: body.generated_text }].concat(
-        generated_list.value
-      );
+      generated_list.value = [
+        { origin: message, text: body.generated_text },
+      ].concat(generated_list.value);
       localStorage.setItem(
         "generated_list",
         JSON.stringify(generated_list.value)
@@ -53,9 +53,9 @@ const answer = async (question, context) => {
   })
     .then((response) => response.json())
     .then((body) => {
-      generated_list.value = [{ text: body.answer }].concat(
-        generated_list.value
-      );
+      generated_list.value = [
+        { origin: `${context} - ${question}`, text: body.answer },
+      ].concat(generated_list.value);
       localStorage.setItem(
         "generated_list",
         JSON.stringify(generated_list.value)
@@ -81,9 +81,9 @@ const headline = async (message) => {
   })
     .then((response) => response.json())
     .then((body) => {
-      generated_list.value = [{ text: body.generated_text }].concat(
-        generated_list.value
-      );
+      generated_list.value = [
+        { origin: message, text: body.generated_text },
+      ].concat(generated_list.value);
       localStorage.setItem(
         "generated_list",
         JSON.stringify(generated_list.value)
@@ -109,9 +109,9 @@ const summarize = async (message) => {
   })
     .then((response) => response.json())
     .then((body) => {
-      generated_list.value = [{ text: body.summary_text }].concat(
-        generated_list.value
-      );
+      generated_list.value = [
+        { origin: message, text: body.summary_text },
+      ].concat(generated_list.value);
       localStorage.setItem(
         "generated_list",
         JSON.stringify(generated_list.value)
@@ -158,6 +158,7 @@ onMounted(() => {
       class="generated-text"
       v-for="(item, index) in generated_list"
       :text="item.text"
+      :origin="item.origin"
       :generate="generate"
       :answer="answer"
       :index="index"

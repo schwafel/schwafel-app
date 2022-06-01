@@ -3,6 +3,10 @@ import { ref } from "vue";
 import ToolBox from "./ToolBox.vue";
 import QuestionComponent from "./QuestionComponent.vue";
 const props = defineProps({
+  origin: {
+    type: String,
+    required: false,
+  },
   text: {
     type: String,
     required: true,
@@ -29,6 +33,13 @@ const copyText = () => {
     @mouseleave="hover = false"
   >
     <div class="card">
+      <textarea
+        class="form-control"
+        v-if="hover && origin"
+        v-model="origin"
+        rows="1"
+        title="origin text"
+      />
       <textarea
         class="form-control"
         v-model="text"
